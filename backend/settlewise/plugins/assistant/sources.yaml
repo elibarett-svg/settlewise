@@ -1,0 +1,193 @@
+# Knowledge base for the AI Settlement Assistant (3.2 Show Source Links).
+# Every entry points to an official public page. reviewed_on stays null until a
+# content reviewer (stakeholder S8) has checked the page and summary; the app
+# shows "Pending content review" until then. Run scripts/check_sources.py to
+# find broken links.
+- id: ircc-new-immigrants
+  title: New immigrants - IRCC
+  publisher: Immigration, Refugees and Citizenship Canada
+  url: https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html
+  reviewed_on: null
+  tags: [newcomer, arrival, address, ircc, settle, first steps, permanent resident]
+  summary: >-
+    Starting point for people who recently immigrated: what to do after arriving, getting
+    important documents, finding free settlement services and keeping IRCC informed of changes
+    such as a new address.
+- id: ircc-pr-card
+  title: PR card - IRCC
+  publisher: Immigration, Refugees and Citizenship Canada
+  url: https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants/pr-card.html
+  reviewed_on: null
+  tags: [pr card, permanent resident, renew, expire, travel, return]
+  summary: >-
+    How to apply for, renew or replace a permanent resident card. Permanent residents need a valid
+    PR card or a PR travel document to board a flight back to Canada.
+- id: ircc-pr-status
+  title: Understand permanent resident status - IRCC
+  publisher: Immigration, Refugees and Citizenship Canada
+  url: https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants/pr-card/understand-pr-status.html
+  reviewed_on: null
+  tags: [residency obligation, days, permanent resident, travel, status, lose status]
+  summary: >-
+    Explains the rights of permanent residents and the residency obligation: permanent residents
+    must be physically present in Canada for a minimum number of days within a five-year period.
+- id: ircc-pr-travel-document
+  title: Permanent resident travel document - IRCC
+  publisher: Immigration, Refugees and Citizenship Canada
+  url: https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants/pr-card/apply-travel-document.html
+  reviewed_on: null
+  tags: [prtd, travel document, outside canada, pr card expired, return]
+  summary: >-
+    Permanent residents outside Canada without a valid PR card can apply for a permanent resident
+    travel document (PRTD) to return to Canada by plane, train, bus or boat.
+- id: ircc-immigrate
+  title: Immigrate to Canada - IRCC
+  publisher: Immigration, Refugees and Citizenship Canada
+  url: https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada.html
+  reviewed_on: null
+  tags: [permanent residence, application, express entry, program, documents, checklist]
+  summary: >-
+    Overview of immigration programs and links to each program's official guide and document
+    checklist. Program rules and eligibility are set by IRCC.
+- id: ircc-citizenship-eligibility
+  title: Canadian citizenship eligibility - IRCC
+  publisher: Immigration, Refugees and Citizenship Canada
+  url: https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility.html
+  reviewed_on: null
+  tags: [citizenship, eligibility, physical presence, apply, become canadian]
+  summary: >-
+    Official requirements to become a Canadian citizen, including physical presence, tax filing and
+    language requirements, with a presence calculator.
+- id: ircc-newcomer-services
+  title: Find free newcomer services near you - IRCC
+  publisher: Immigration, Refugees and Citizenship Canada
+  url: https://ircc.canada.ca/english/newcomers/services/index.asp
+  reviewed_on: null
+  tags: [settlement services, free, agency, help, language classes, employment, near me]
+  summary: >-
+    Search tool for free, government-funded newcomer services such as settlement help, language
+    classes and job search support, by postal code.
+- id: cicc-find-consultant
+  title: Find a licensed immigration consultant - College of Immigration and Citizenship Consultants
+  publisher: College of Immigration and Citizenship Consultants
+  url: https://college-ic.ca/
+  reviewed_on: null
+  tags: [consultant, licensed, rcic, legal advice, immigration advice, representative, sponsorship]
+  summary: >-
+    The regulator for immigration and citizenship consultants in Canada. Use its public register to
+    check that a consultant is licensed before paying for advice.
+- id: esdc-sin
+  title: Social Insurance Number - Service Canada
+  publisher: Employment and Social Development Canada
+  url: https://www.canada.ca/en/employment-social-development/services/sin.html
+  reviewed_on: null
+  tags: [sin, social insurance number, work, employer, payroll, apply]
+  summary: >-
+    You need a Social Insurance Number to work in Canada or receive government benefits. Explains
+    who can apply, the documents needed and how to keep your SIN protected.
+- id: cra-newcomers
+  title: Newcomers to Canada (immigrants) - CRA
+  publisher: Canada Revenue Agency
+  url: https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html
+  reviewed_on: null
+  tags: [tax, newcomer, residency, file taxes, benefits, gst credit]
+  summary: >-
+    Tax information for newcomers: residency status for tax purposes, filing your first return and
+    applying for benefits and credits.
+- id: cra-my-account
+  title: My Account for individuals - CRA
+  publisher: Canada Revenue Agency
+  url: https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-individuals/account-individuals.html
+  reviewed_on: null
+  tags: [cra, my account, address change, update address, tax, benefits, moving]
+  summary: >-
+    The CRA's secure online portal. You can view tax and benefit information and change your
+    address after you move.
+- id: cra-td1
+  title: TD1 Personal Tax Credits Returns - CRA
+  publisher: Canada Revenue Agency
+  url: https://www.canada.ca/en/revenue-agency/services/forms-publications/td1-personal-tax-credits-returns.html
+  reviewed_on: null
+  tags: [td1, new job, payroll, tax deduction, employer, forms]
+  summary: >-
+    Federal and provincial TD1 forms you give a new employer so they deduct the right amount of
+    income tax from your pay.
+- id: cra-ccb
+  title: Canada Child Benefit - CRA
+  publisher: Canada Revenue Agency
+  url: https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit-overview.html
+  reviewed_on: null
+  tags: [child benefit, ccb, children, family, apply, newborn]
+  summary: >-
+    A tax-free monthly payment to eligible families to help with the cost of raising children under
+    18. Explains who can apply and how.
+- id: ontario-ohip
+  title: Apply for OHIP and get a health card - Ontario
+  publisher: Government of Ontario
+  url: https://www.ontario.ca/page/apply-ohip-and-get-health-card
+  reviewed_on: null
+  tags: [ohip, health card, health insurance, ontario, doctor, newcomer]
+  summary: >-
+    How to apply for Ontario Health Insurance Plan coverage and a health card, who is eligible and
+    the documents to bring to ServiceOntario.
+- id: ontario-change-address
+  title: Change your address - Ontario
+  publisher: Government of Ontario
+  url: https://www.ontario.ca/page/change-your-address
+  reviewed_on: null
+  tags: [address change, driver's licence, health card, vehicle permit, moving, serviceontario]
+  summary: >-
+    Change the address on your Ontario driver's licence, vehicle permit and health card, online or
+    in person at ServiceOntario.
+- id: ontario-renting-rights
+  title: Renting in Ontario - your rights
+  publisher: Government of Ontario
+  url: https://www.ontario.ca/page/renting-ontario-your-rights
+  reviewed_on: null
+  tags: [tenant, landlord, lease, notice, rent, deposit, moving, eviction]
+  summary: >-
+    Rights and responsibilities of tenants and landlords in Ontario, including the standard lease,
+    rent deposits, rent increases and how to end a tenancy.
+- id: ontario-esa
+  title: Your guide to the Employment Standards Act - Ontario
+  publisher: Government of Ontario
+  url: https://www.ontario.ca/document/your-guide-employment-standards-act-0
+  reviewed_on: null
+  tags: [employment standards, work rights, minimum wage, overtime, vacation, new job, ontario]
+  summary: >-
+    Minimum standards for most workplaces in Ontario: pay, hours, overtime, vacation, public
+    holidays and leaves.
+- id: canada-post-forwarding
+  title: Mail forwarding - Canada Post
+  publisher: Canada Post
+  url: https://www.canadapost-postescanada.ca/cpc/en/personal/receiving/manage-mail/mail-forwarding.page
+  reviewed_on: null
+  tags: [mail forwarding, moving, address, mail]
+  summary: >-
+    Forward your mail to a new address for a chosen period when you move. A fee applies.
+- id: fcac-bank-account
+  title: Opening a bank account - Financial Consumer Agency of Canada
+  publisher: Financial Consumer Agency of Canada
+  url: https://www.canada.ca/en/financial-consumer-agency/services/banking/opening-bank-account.html
+  reviewed_on: null
+  tags: [bank account, banking, identification, newcomer, open account, fees]
+  summary: >-
+    Your rights when opening a bank account, the identification banks may accept and how to compare
+    account fees.
+- id: travel-gc
+  title: Travel advice and advisories - Government of Canada
+  publisher: Global Affairs Canada
+  url: https://travel.gc.ca/
+  reviewed_on: null
+  tags: [travel, advisory, destination, trip, safety, abroad]
+  summary: >-
+    Official travel advice for every country, entry requirements and what to know before you leave
+    Canada.
+- id: job-bank
+  title: Job Bank - Government of Canada
+  publisher: Employment and Social Development Canada
+  url: https://www.jobbank.gc.ca/
+  reviewed_on: null
+  tags: [jobs, job search, employment, wages, careers]
+  summary: >-
+    Government job board with job postings, wage information and career planning tools.

@@ -1,0 +1,61 @@
+id: pr_preparation
+title: Permanent residence preparation
+description: Organise documents and timelines before a permanent residence application.
+key_date_label: Target submission date
+tasks:
+  - key: official_checklist
+    title: Read the official program guide and document checklist
+    category: documents
+    offset_days: -150
+    priority: high
+    source_ids: [ircc-immigrate]
+  - key: language_test
+    title: Book an approved language test
+    category: documents
+    offset_days: -150
+    priority: high
+    depends_on: [official_checklist]
+    date_sensitive: true
+    external_party: Language test centre
+  - key: professional
+    title: Book a consultation with a licensed professional for case-specific questions
+    category: legal
+    offset_days: -120
+    priority: medium
+    guidance: SettleWise organises your documents and dates; it does not assess eligibility.
+    source_ids: [cicc-find-consultant]
+  - key: police_certificates
+    title: Request police certificates from each country you lived in
+    category: documents
+    offset_days: -120
+    priority: high
+    depends_on: [official_checklist]
+    external_party: Foreign police authorities
+  - key: identity_docs
+    title: Gather identity and civil status documents for each family member
+    category: documents
+    offset_days: -90
+    priority: high
+    depends_on: [official_checklist]
+  - key: translations
+    title: Get certified translations of documents not in English or French
+    category: documents
+    offset_days: -60
+    priority: medium
+    depends_on: [identity_docs]
+    external_party: Certified translator
+  - key: proof_of_funds
+    title: Prepare proof of funds statements
+    category: finance
+    offset_days: -30
+    priority: medium
+    external_party: Bank
+  - key: photos
+    title: Get photos that meet the specifications
+    category: documents
+    offset_days: -14
+    priority: low
+costs:
+  - {label: Language test fee, category: documents, amount: 320, offset_days: -150}
+  - {label: Translations, category: documents, amount: 300, offset_days: -60}
+  - {label: Police certificates, category: documents, amount: 100, offset_days: -120}

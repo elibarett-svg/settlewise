@@ -1,0 +1,64 @@
+id: travel
+title: International travel
+description: Travel outside Canada and come back without document surprises.
+key_date_label: Departure date
+tasks:
+  - key: check_passport
+    title: Check your passport is valid for the whole trip
+    category: documents
+    offset_days: -60
+    priority: high
+  - key: check_pr_card
+    title: Check your PR card is valid for your return date
+    category: documents
+    offset_days: -60
+    priority: high
+    when: {immigration_status: [permanent_resident]}
+    source_ids: [ircc-pr-card]
+  - key: residency_days
+    title: Count your days in Canada for the residency obligation
+    category: documents
+    offset_days: -45
+    priority: medium
+    when: {immigration_status: [permanent_resident]}
+    source_ids: [ircc-pr-status]
+  - key: prtd
+    title: Apply for a PR travel document if your card will expire abroad
+    category: documents
+    offset_days: -45
+    priority: high
+    depends_on: [check_pr_card]
+    when: {immigration_status: [permanent_resident]}
+    source_ids: [ircc-pr-travel-document]
+  - key: book_flights
+    title: Book flights
+    category: travel
+    offset_days: -45
+    priority: medium
+    depends_on: [check_passport]
+    date_sensitive: true
+    external_party: Airline or travel agent
+  - key: travel_insurance
+    title: Buy travel medical insurance for your dates
+    category: insurance
+    offset_days: -14
+    priority: high
+    depends_on: [book_flights]
+    date_sensitive: true
+    external_party: Insurer
+  - key: advisories
+    title: Check travel advice for your destination
+    category: travel
+    offset_days: -14
+    priority: medium
+    source_ids: [travel-gc]
+  - key: notify_bank
+    title: Tell your bank and card issuer about your travel dates
+    category: finance
+    offset_days: -3
+    priority: low
+    date_sensitive: true
+    external_party: Bank
+costs:
+  - {label: Flights, category: travel, amount: 1500, offset_days: -45}
+  - {label: Travel medical insurance, category: insurance, amount: 120, offset_days: -14}

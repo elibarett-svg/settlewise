@@ -1,0 +1,67 @@
+# Provider directory seed (6.1). SAMPLE RECORDS ONLY - every entry is synthetic,
+# per the Project Vision constraint that the prototype uses synthetic data.
+# Content reviewers (stakeholder S8) replace these with reviewed, dated listings.
+- name: Harbourfront Newcomer Settlement Centre (sample)
+  service_types: [settlement_agency, employment, housing]
+  city: Toronto
+  province: "ON"
+  phone: "416-555-0101"
+  website: https://example.org/harbourfront
+  languages: [English, French, Tagalog, Arabic]
+  description: Free settlement counselling, housing search help and employment workshops.
+- name: Lakeshore Community Legal Clinic (sample)
+  service_types: [legal_clinic]
+  city: Toronto
+  province: "ON"
+  phone: "416-555-0102"
+  website: https://example.org/lakeshore-legal
+  languages: [English, Spanish, Portuguese]
+  description: Free legal information for tenants and workers with low income.
+- name: Maple Immigration Consulting (sample licensed consultant)
+  service_types: [immigration_consultant]
+  city: Toronto
+  province: "ON"
+  phone: "416-555-0103"
+  website: https://example.org/maple-rcic
+  languages: [English, Hindi, Punjabi]
+  description: Licensed consultant for case-specific immigration questions. Fees apply.
+- name: Northway Credit Union Newcomer Desk (sample)
+  service_types: [bank]
+  city: Toronto
+  province: "ON"
+  phone: "416-555-0104"
+  website: https://example.org/northway
+  languages: [English, Mandarin, Cantonese]
+  description: Newcomer accounts and credit-building products.
+- name: Trillium Home & Tenant Insurance (sample)
+  service_types: [insurer]
+  city: Toronto
+  province: "ON"
+  phone: "416-555-0105"
+  website: https://example.org/trillium-insurance
+  languages: [English, French]
+  description: Tenant and auto insurance quotes.
+- name: Ottawa Valley Welcome Centre (sample)
+  service_types: [settlement_agency, healthcare, language_classes]
+  city: Ottawa
+  province: "ON"
+  phone: "613-555-0106"
+  website: https://example.org/ottawa-welcome
+  languages: [English, French, Somali]
+  description: Settlement help, language classes and help finding a family doctor.
+- name: Prairie Gateway Settlement Services (sample)
+  service_types: [settlement_agency, employment]
+  city: Calgary
+  province: "AB"
+  phone: "403-555-0107"
+  website: https://example.org/prairie-gateway
+  languages: [English, Ukrainian, Arabic]
+  description: Employment coaching and settlement services.
+- name: Pacific Bridge Family Services (sample)
+  service_types: [settlement_agency, family, childcare]
+  city: Vancouver
+  province: "BC"
+  phone: "604-555-0108"
+  website: https://example.org/pacific-bridge
+  languages: [English, Korean, Farsi]
+  description: Family programs, childcare referrals and parenting workshops.

@@ -1,0 +1,31 @@
+# Local stack: PostgreSQL + the SettleWise API.  docker compose up --build
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: settlewise
+      POSTGRES_PASSWORD: settlewise
+      POSTGRES_DB: settlewise
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U settlewise"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SETTLEWISE_DATABASE_URL: postgresql+psycopg://settlewise:settlewise@db:5432/settlewise
+      SETTLEWISE_SECRET_KEY: ${SETTLEWISE_SECRET_KEY:-dev-only-insecure-secret-change-me-in-production}
+      SETTLEWISE_ENABLED_PHASES: ${SETTLEWISE_ENABLED_PHASES:-["MVP"]}
+      SETTLEWISE_SEED_DEMO_DATA: ${SETTLEWISE_SEED_DEMO_DATA:-true}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:

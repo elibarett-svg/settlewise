@@ -1,0 +1,51 @@
+id: new_job
+title: Starting a new job
+description: Payroll, banking, tax forms, benefits and commute for a new position.
+key_date_label: Start date
+tasks:
+  - key: sin
+    title: Have your Social Insurance Number ready for your employer
+    category: government
+    offset_days: -14
+    priority: high
+    source_ids: [esdc-sin]
+  - key: know_rights
+    title: Read the basics of employment standards in your province
+    category: employment
+    offset_days: -7
+    priority: low
+    when: {province: ["ON"]}
+    source_ids: [ontario-esa]
+  - key: commute
+    title: Plan your commute and buy a transit pass if needed
+    category: travel
+    offset_days: -3
+    priority: medium
+  - key: td1
+    title: Complete your federal and provincial TD1 forms
+    category: tax
+    offset_days: 0
+    priority: high
+    depends_on: [sin]
+    external_party: Employer
+    source_ids: [cra-td1]
+  - key: direct_deposit
+    title: Give your employer direct deposit details
+    category: finance
+    offset_days: 0
+    priority: high
+    external_party: Employer
+  - key: benefits
+    title: Enrol in workplace benefits before the deadline
+    category: insurance
+    offset_days: 30
+    priority: high
+    date_sensitive: true
+    external_party: Employer benefits provider
+  - key: update_budget
+    title: Add your new income to your budget
+    category: finance
+    offset_days: 14
+    priority: medium
+costs:
+  - {label: Monthly transit pass, category: travel, amount: 156, offset_days: 0}

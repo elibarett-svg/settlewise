@@ -1,0 +1,53 @@
+id: family_change
+title: Family change
+description: A new family member, a marriage or a family member arriving in Canada.
+key_date_label: Date of the change
+tasks:
+  - key: add_member
+    title: Add the family member to your SettleWise household
+    category: family
+    offset_days: 0
+    priority: medium
+  - key: health_coverage
+    title: Apply for provincial health coverage for the family member
+    category: health
+    offset_days: 7
+    priority: high
+    depends_on: [add_member]
+    when: {province: ["ON"]}
+    source_ids: [ontario-ohip]
+  - key: ccb
+    title: Apply for the Canada Child Benefit
+    category: finance
+    offset_days: 30
+    priority: high
+    when: {has_children: true}
+    source_ids: [cra-ccb]
+  - key: school
+    title: Register children for school or childcare
+    category: family
+    offset_days: 30
+    priority: medium
+    when: {has_children: true}
+    external_party: School board
+  - key: insurance_update
+    title: Update insurance policies and beneficiaries
+    category: insurance
+    offset_days: 30
+    priority: medium
+    date_sensitive: true
+    external_party: Insurer
+  - key: sponsorship_advice
+    title: Speak with a licensed professional before any sponsorship application
+    category: legal
+    offset_days: 14
+    priority: medium
+    guidance: SettleWise does not give immigration advice. A licensed consultant or lawyer can review your situation.
+    source_ids: [cicc-find-consultant]
+  - key: budget_review
+    title: Update your household budget
+    category: finance
+    offset_days: 14
+    priority: medium
+costs:
+  - {label: Family setup costs, category: family, amount: 500, offset_days: 0}

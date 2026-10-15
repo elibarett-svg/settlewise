@@ -1,0 +1,102 @@
+# Life event template. offset_days is relative to the key date (negative = before).
+# date_sensitive tasks are flagged for review with the named external party when
+# the key date changes (event impact analysis, 4.4).
+id: moving
+title: Moving home
+description: Plan a move - notice, lease, utilities, insurance, address changes and costs.
+key_date_label: Move date
+tasks:
+  - key: give_notice
+    title: Give written notice to your current landlord
+    category: housing
+    offset_days: -60
+    priority: high
+    external_party: Current landlord
+    guidance: Check your lease and provincial rules for how much notice is required and how it must be given.
+    source_ids: [ontario-renting-rights]
+  - key: sign_lease
+    title: Sign the new lease and keep a copy
+    category: housing
+    offset_days: -45
+    priority: high
+    external_party: New landlord
+    guidance: Read the lease before signing. Keep a copy with your documents.
+    source_ids: [ontario-renting-rights]
+  - key: book_movers
+    title: Book movers or a truck rental
+    category: travel
+    offset_days: -30
+    priority: medium
+    date_sensitive: true
+    external_party: Moving company
+    guidance: Get at least two quotes. Confirm the date, insurance and what is included.
+  - key: tenant_insurance
+    title: Confirm tenant insurance starts on the move date
+    category: insurance
+    offset_days: -14
+    priority: high
+    depends_on: [sign_lease]
+    date_sensitive: true
+    external_party: Insurer
+    guidance: Many landlords ask for proof of tenant insurance before you get the keys.
+  - key: utilities_transfer
+    title: Schedule hydro, gas and internet transfer
+    category: utilities
+    offset_days: -14
+    priority: high
+    depends_on: [sign_lease]
+    date_sensitive: true
+    external_party: Utility providers
+    guidance: Ask each provider to stop service at the old address and start it at the new one on the move date.
+  - key: school_transfer
+    title: Register children at the new school
+    category: family
+    offset_days: -21
+    priority: high
+    when: {has_children: true}
+    external_party: School board
+  - key: mail_forwarding
+    title: Set up mail forwarding
+    category: government
+    offset_days: -7
+    priority: medium
+    date_sensitive: true
+    external_party: Canada Post
+    source_ids: [canada-post-forwarding]
+  - key: update_cra
+    title: Update your address with the CRA
+    category: government
+    offset_days: 7
+    priority: medium
+    source_ids: [cra-my-account]
+  - key: update_ircc
+    title: Update your address with IRCC
+    category: government
+    offset_days: 7
+    priority: medium
+    when: {immigration_status: [permanent_resident, work_permit, study_permit, protected_person]}
+    source_ids: [ircc-new-immigrants]
+  - key: update_provincial_ids
+    title: Update the address on your health card and driver's licence
+    category: government
+    offset_days: 10
+    priority: medium
+    when: {province: ["ON"]}
+    source_ids: [ontario-change-address]
+  - key: update_vehicle
+    title: Update the address on your vehicle permit
+    category: government
+    offset_days: 10
+    priority: low
+    when: {has_vehicle: true, province: ["ON"]}
+    source_ids: [ontario-change-address]
+  - key: update_bank
+    title: Update your address with your bank and other insurers
+    category: finance
+    offset_days: 7
+    priority: medium
+costs:
+  - {label: Last month's rent deposit, category: housing, amount: 2400, offset_days: -45}
+  - {label: Movers or truck rental, category: moving, amount: 1200, offset_days: 0}
+  - {label: Utility connection fees, category: utilities, amount: 100, offset_days: 0}
+  - {label: Tenant insurance (first month), category: insurance, amount: 30, offset_days: 0}

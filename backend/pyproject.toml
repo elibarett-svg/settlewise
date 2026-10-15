@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "settlewise"
+version = "0.1.0"
+description = "SettleWise - Personal Digital Case Management System for newcomers to Canada (API + plugins)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "sqlalchemy>=2.0.30",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.3",
+  "email-validator>=2.1",
+  "pyjwt>=2.8",
+  "pyyaml>=6.0",
+  "httpx>=0.27",
+  "anthropic>=1.0",
+  "tzdata>=2024.1",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+settlewise = "settlewise.cli:main"
+
+# Built-in feature plugins. Third-party packages can add their own plugins by
+# declaring an entry point in this same group - no change to the core needed.
+[project.entry-points."settlewise.plugins"]
+account = "settlewise.plugins.account:plugin"
+profile = "settlewise.plugins.profile:plugin"
+autofill = "settlewise.plugins.autofill:plugin"
+planning = "settlewise.plugins.planning:plugin"
+assistant = "settlewise.plugins.assistant:plugin"
+tasks = "settlewise.plugins.tasks:plugin"
+finance = "settlewise.plugins.finance:plugin"
+referrals = "settlewise.plugins.referrals:plugin"
+consent = "settlewise.plugins.consent:plugin"
+worker_portal = "settlewise.plugins.worker_portal:plugin"
+notifications = "settlewise.plugins.notifications:plugin"
+
+[tool.setuptools.packages.find]
+include = ["settlewise*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["B008"]
