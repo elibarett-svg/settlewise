@@ -13,3 +13,4 @@ android/
 .env
 .env.local
 expo-env.d.ts
+dist-demo/

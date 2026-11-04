@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { Linking, Pressable, View } from 'react-native';
+import { Linking, Platform, Pressable, Text, View } from 'react-native';
 
 import type { LifeEvent, Source, Task } from '../api/types';
 import { useT } from '../i18n';
@@ -134,13 +134,20 @@ export function SourceLinks({ sources }: { sources: Source[] }) {
       {sources.map((s) => (
         <Pressable
           key={s.id}
-          onPress={() => Linking.openURL(s.url)}
+          onPress={Platform.OS === 'web' ? undefined : () => Linking.openURL(s.url)}
           accessibilityRole="link"
           style={{ flexDirection: 'row', gap: spacing.sm, alignItems: 'flex-start' }}
         >
           <Ionicons name="open-outline" size={16} color={c.primary} style={{ marginTop: 2 }} />
           <View style={{ flex: 1 }}>
-            <Body style={{ color: c.primary, fontSize: 15 }}>{s.title}</Body>
+            {Platform.OS === 'web' ? (
+              // A real link on web: pages hosted in a sandboxed frame cannot open pop-ups.
+              <Text {...({ href: s.url, hrefAttrs: { target: '_blank', rel: 'noopener noreferrer' } } as object)} style={{ color: c.primary, fontSize: 15, lineHeight: 22 }}>
+                {s.title}
+              </Text>
+            ) : (
+              <Body style={{ color: c.primary, fontSize: 15 }}>{s.title}</Body>
+            )}
             <Muted>
               {s.publisher} · {s.reviewed_on ? `Reviewed ${formatDate(s.reviewed_on)}` : t.assistant.pendingReview}
             </Muted>

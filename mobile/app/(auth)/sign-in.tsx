@@ -1,12 +1,11 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert } from 'react-native';
 
 import { api, ApiError } from '../../src/api/client';
 import { useAuth } from '../../src/auth/AuthContext';
 import { Button, Muted, Screen, TextField, Title } from '../../src/components/ui';
 import { useT } from '../../src/i18n';
-import { showError } from '../../src/lib/alerts';
+import { notify, showError } from '../../src/lib/alerts';
 
 export default function SignIn() {
   const t = useT();
@@ -30,10 +29,10 @@ export default function SignIn() {
   };
 
   const forgot = async () => {
-    if (!email.trim()) return Alert.alert('Enter your email first');
+    if (!email.trim()) return notify('Enter your email first');
     try {
       await api('/auth/password/reset-request', { method: 'POST', body: { email: email.trim() } });
-      Alert.alert('Check your email', 'If an account exists, we sent instructions to reset your password.');
+      notify('Check your email', 'If an account exists, we sent instructions to reset your password.');
     } catch (e) {
       showError(e);
     }

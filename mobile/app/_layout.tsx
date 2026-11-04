@@ -1,11 +1,14 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import * as Font from 'expo-font';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { DEMO } from '../src/api/client';
 import { AuthProvider, useAuth } from '../src/auth/AuthContext';
+import { DialogHost } from '../src/components/DialogHost';
 import { Loading } from '../src/components/ui';
 import { registerForPush, useNotificationRouting } from '../src/lib/notifications';
 import { useColors, useIsDark } from '../src/theme';
@@ -14,14 +17,43 @@ export default function RootLayout() {
   const [queryClient] = useState(
     () => new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: 30_000 } } }),
   );
+  const fontsReady = useEmbeddedFonts();
+  if (!fontsReady) return null;
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Navigation />
+          <PhoneFrame>
+            <Navigation />
+          </PhoneFrame>
+          <DialogHost />
         </AuthProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
+  );
+}
+
+/** The single-file web demo embeds the icon font (see scripts/inline-web-demo.js) because
+ * the page cannot load font files; register it before any icon renders. */
+function useEmbeddedFonts(): boolean {
+  const embedded = DEMO && Platform.OS === 'web' ? (globalThis as { __SETTLEWISE_FONTS__?: Record<string, string> }).__SETTLEWISE_FONTS__ : undefined;
+  const [ready, setReady] = useState(!embedded);
+  useEffect(() => {
+    if (embedded) Font.loadAsync(embedded).finally(() => setReady(true));
+  }, [embedded]);
+  return ready;
+}
+
+/** On a laptop browser, show the app at phone width instead of stretched across the screen. */
+function PhoneFrame({ children }: { children: React.ReactNode }) {
+  const c = useColors();
+  if (Platform.OS !== 'web') return <>{children}</>;
+  return (
+    <View style={{ flex: 1, backgroundColor: c.surfaceAlt }}>
+      <View style={{ flex: 1, width: '100%', maxWidth: 480, alignSelf: 'center', backgroundColor: c.background, overflow: 'hidden' }}>
+        {children}
+      </View>
+    </View>
   );
 }
 

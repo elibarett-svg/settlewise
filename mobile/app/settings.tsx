@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Alert, Share } from 'react-native';
+import { Platform, Share } from 'react-native';
 
-import { api, API_URL } from '../src/api/client';
+import { api, API_URL, DEMO } from '../src/api/client';
 import type { TokenResponse, User } from '../src/api/types';
 import { useAuth } from '../src/auth/AuthContext';
 import { Body, Button, Card, ChipGroup, Heading, Muted, Screen, Sheet, TextField } from '../src/components/ui';
 import { useT } from '../src/i18n';
-import { confirm, showError } from '../src/lib/alerts';
+import { resetDemo } from '../src/demo/server';
+import { confirm, notify, showError } from '../src/lib/alerts';
 
 /** 10.0 Account Administration. */
 export default function Settings() {
@@ -25,6 +26,7 @@ export default function Settings() {
   const exportData = async () => {
     try {
       const data = await api<object>('/account/export');
+      if (Platform.OS === 'web') return notify('Export', 'In the iPhone and Android apps this shares a JSON file of all your data.');
       await Share.share({ title: 'SettleWise data export', message: JSON.stringify(data, null, 2) });
     } catch (e) {
       showError(e);
@@ -63,10 +65,23 @@ export default function Settings() {
         <Button variant="secondary" icon="download-outline" title="Export my data" onPress={exportData} />
         <Button variant="danger" icon="trash-outline" title="Delete my account" onPress={() => setSheet('delete')} />
       </Card>
+      {DEMO && (
+        <Button
+          variant="secondary"
+          icon="refresh"
+          title="Reset demo data"
+          onPress={async () => {
+            if (await confirm('Reset the demo?', "This restores Sarah's sample data and signs you out.", 'Reset')) {
+              resetDemo();
+              await signOut();
+            }
+          }}
+        />
+      )}
       <Button title={t.auth.signOut} variant="ghost" onPress={signOut} />
-      <Muted style={{ textAlign: 'center', fontSize: 12 }}>Server: {API_URL}</Muted>
+      <Muted style={{ textAlign: 'center', fontSize: 12 }}>{DEMO ? 'Web demo: sample data stays in this browser' : `Server: ${API_URL}`}</Muted>
 
-      <PasswordSheet visible={sheet === 'password'} onClose={() => setSheet(null)} onDone={async (res) => { await acceptToken(res); setSheet(null); Alert.alert('Password changed'); }} />
+      <PasswordSheet visible={sheet === 'password'} onClose={() => setSheet(null)} onDone={async (res) => { await acceptToken(res); setSheet(null); notify('Password changed'); }} />
       <TotpSheet visible={sheet === '2fa'} enabled={user.totp_enabled} onClose={() => setSheet(null)} onDone={(u) => { setUser(u); setSheet(null); }} />
       <DeleteSheet visible={sheet === 'delete'} onClose={() => setSheet(null)} onDone={signOut} />
     </Screen>

@@ -11,10 +11,10 @@ setup: ## Create the Python venv and install the API and the mobile app
 	cd mobile && npm install
 
 api: ## Run the API with demo data and every phase enabled (http://localhost:8000/docs)
-	cd backend && SETTLEWISE_SEED_DEMO_DATA=true SETTLEWISE_ENABLED_PHASES='["MVP","Growth","Enterprise"]' .venv/bin/settlewise serve --reload
+	cd backend && SETTLEWISE_SEED_DEMO_DATA=true SETTLEWISE_ENABLED_PHASES='["MVP","Growth","Enterprise"]' .venv/bin/python -m settlewise.cli serve --reload
 
 seed: ## Create the synthetic demo accounts
-	cd backend && .venv/bin/settlewise seed
+	cd backend && .venv/bin/python -m settlewise.cli seed
 
 test: ## Run backend tests
 	cd backend && .venv/bin/pytest -q

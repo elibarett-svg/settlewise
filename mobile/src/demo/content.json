@@ -1,0 +1,1070 @@
+{
+ "templates": [
+  {
+   "id": "family_change",
+   "title": "Family change",
+   "description": "A new family member, a marriage or a family member arriving in Canada.",
+   "key_date_label": "Date of the change",
+   "tasks": [
+    {
+     "key": "add_member",
+     "title": "Add the family member to your SettleWise household",
+     "category": "family",
+     "offset_days": 0,
+     "priority": "medium"
+    },
+    {
+     "key": "health_coverage",
+     "title": "Apply for provincial health coverage for the family member",
+     "category": "health",
+     "offset_days": 7,
+     "priority": "high",
+     "depends_on": [
+      "add_member"
+     ],
+     "when": {
+      "province": [
+       "ON"
+      ]
+     },
+     "source_ids": [
+      "ontario-ohip"
+     ]
+    },
+    {
+     "key": "ccb",
+     "title": "Apply for the Canada Child Benefit",
+     "category": "finance",
+     "offset_days": 30,
+     "priority": "high",
+     "when": {
+      "has_children": true
+     },
+     "source_ids": [
+      "cra-ccb"
+     ]
+    },
+    {
+     "key": "school",
+     "title": "Register children for school or childcare",
+     "category": "family",
+     "offset_days": 30,
+     "priority": "medium",
+     "when": {
+      "has_children": true
+     },
+     "external_party": "School board"
+    },
+    {
+     "key": "insurance_update",
+     "title": "Update insurance policies and beneficiaries",
+     "category": "insurance",
+     "offset_days": 30,
+     "priority": "medium",
+     "date_sensitive": true,
+     "external_party": "Insurer"
+    },
+    {
+     "key": "sponsorship_advice",
+     "title": "Speak with a licensed professional before any sponsorship application",
+     "category": "legal",
+     "offset_days": 14,
+     "priority": "medium",
+     "guidance": "SettleWise does not give immigration advice. A licensed consultant or lawyer can review your situation.",
+     "source_ids": [
+      "cicc-find-consultant"
+     ]
+    },
+    {
+     "key": "budget_review",
+     "title": "Update your household budget",
+     "category": "finance",
+     "offset_days": 14,
+     "priority": "medium"
+    }
+   ],
+   "costs": [
+    {
+     "label": "Family setup costs",
+     "category": "family",
+     "amount": 500,
+     "offset_days": 0
+    }
+   ]
+  },
+  {
+   "id": "moving",
+   "title": "Moving home",
+   "description": "Plan a move - notice, lease, utilities, insurance, address changes and costs.",
+   "key_date_label": "Move date",
+   "tasks": [
+    {
+     "key": "give_notice",
+     "title": "Give written notice to your current landlord",
+     "category": "housing",
+     "offset_days": -60,
+     "priority": "high",
+     "external_party": "Current landlord",
+     "guidance": "Check your lease and provincial rules for how much notice is required and how it must be given.",
+     "source_ids": [
+      "ontario-renting-rights"
+     ]
+    },
+    {
+     "key": "sign_lease",
+     "title": "Sign the new lease and keep a copy",
+     "category": "housing",
+     "offset_days": -45,
+     "priority": "high",
+     "external_party": "New landlord",
+     "guidance": "Read the lease before signing. Keep a copy with your documents.",
+     "source_ids": [
+      "ontario-renting-rights"
+     ]
+    },
+    {
+     "key": "book_movers",
+     "title": "Book movers or a truck rental",
+     "category": "travel",
+     "offset_days": -30,
+     "priority": "medium",
+     "date_sensitive": true,
+     "external_party": "Moving company",
+     "guidance": "Get at least two quotes. Confirm the date, insurance and what is included."
+    },
+    {
+     "key": "tenant_insurance",
+     "title": "Confirm tenant insurance starts on the move date",
+     "category": "insurance",
+     "offset_days": -14,
+     "priority": "high",
+     "depends_on": [
+      "sign_lease"
+     ],
+     "date_sensitive": true,
+     "external_party": "Insurer",
+     "guidance": "Many landlords ask for proof of tenant insurance before you get the keys."
+    },
+    {
+     "key": "utilities_transfer",
+     "title": "Schedule hydro, gas and internet transfer",
+     "category": "utilities",
+     "offset_days": -14,
+     "priority": "high",
+     "depends_on": [
+      "sign_lease"
+     ],
+     "date_sensitive": true,
+     "external_party": "Utility providers",
+     "guidance": "Ask each provider to stop service at the old address and start it at the new one on the move date."
+    },
+    {
+     "key": "school_transfer",
+     "title": "Register children at the new school",
+     "category": "family",
+     "offset_days": -21,
+     "priority": "high",
+     "when": {
+      "has_children": true
+     },
+     "external_party": "School board"
+    },
+    {
+     "key": "mail_forwarding",
+     "title": "Set up mail forwarding",
+     "category": "government",
+     "offset_days": -7,
+     "priority": "medium",
+     "date_sensitive": true,
+     "external_party": "Canada Post",
+     "source_ids": [
+      "canada-post-forwarding"
+     ]
+    },
+    {
+     "key": "update_cra",
+     "title": "Update your address with the CRA",
+     "category": "government",
+     "offset_days": 7,
+     "priority": "medium",
+     "source_ids": [
+      "cra-my-account"
+     ]
+    },
+    {
+     "key": "update_ircc",
+     "title": "Update your address with IRCC",
+     "category": "government",
+     "offset_days": 7,
+     "priority": "medium",
+     "when": {
+      "immigration_status": [
+       "permanent_resident",
+       "work_permit",
+       "study_permit",
+       "protected_person"
+      ]
+     },
+     "source_ids": [
+      "ircc-new-immigrants"
+     ]
+    },
+    {
+     "key": "update_provincial_ids",
+     "title": "Update the address on your health card and driver's licence",
+     "category": "government",
+     "offset_days": 10,
+     "priority": "medium",
+     "when": {
+      "province": [
+       "ON"
+      ]
+     },
+     "source_ids": [
+      "ontario-change-address"
+     ]
+    },
+    {
+     "key": "update_vehicle",
+     "title": "Update the address on your vehicle permit",
+     "category": "government",
+     "offset_days": 10,
+     "priority": "low",
+     "when": {
+      "has_vehicle": true,
+      "province": [
+       "ON"
+      ]
+     },
+     "source_ids": [
+      "ontario-change-address"
+     ]
+    },
+    {
+     "key": "update_bank",
+     "title": "Update your address with your bank and other insurers",
+     "category": "finance",
+     "offset_days": 7,
+     "priority": "medium"
+    }
+   ],
+   "costs": [
+    {
+     "label": "Last month's rent deposit",
+     "category": "housing",
+     "amount": 2400,
+     "offset_days": -45
+    },
+    {
+     "label": "Movers or truck rental",
+     "category": "moving",
+     "amount": 1200,
+     "offset_days": 0
+    },
+    {
+     "label": "Utility connection fees",
+     "category": "utilities",
+     "amount": 100,
+     "offset_days": 0
+    },
+    {
+     "label": "Tenant insurance (first month)",
+     "category": "insurance",
+     "amount": 30,
+     "offset_days": 0
+    }
+   ]
+  },
+  {
+   "id": "new_job",
+   "title": "Starting a new job",
+   "description": "Payroll, banking, tax forms, benefits and commute for a new position.",
+   "key_date_label": "Start date",
+   "tasks": [
+    {
+     "key": "sin",
+     "title": "Have your Social Insurance Number ready for your employer",
+     "category": "government",
+     "offset_days": -14,
+     "priority": "high",
+     "source_ids": [
+      "esdc-sin"
+     ]
+    },
+    {
+     "key": "know_rights",
+     "title": "Read the basics of employment standards in your province",
+     "category": "employment",
+     "offset_days": -7,
+     "priority": "low",
+     "when": {
+      "province": [
+       "ON"
+      ]
+     },
+     "source_ids": [
+      "ontario-esa"
+     ]
+    },
+    {
+     "key": "commute",
+     "title": "Plan your commute and buy a transit pass if needed",
+     "category": "travel",
+     "offset_days": -3,
+     "priority": "medium"
+    },
+    {
+     "key": "td1",
+     "title": "Complete your federal and provincial TD1 forms",
+     "category": "tax",
+     "offset_days": 0,
+     "priority": "high",
+     "depends_on": [
+      "sin"
+     ],
+     "external_party": "Employer",
+     "source_ids": [
+      "cra-td1"
+     ]
+    },
+    {
+     "key": "direct_deposit",
+     "title": "Give your employer direct deposit details",
+     "category": "finance",
+     "offset_days": 0,
+     "priority": "high",
+     "external_party": "Employer"
+    },
+    {
+     "key": "benefits",
+     "title": "Enrol in workplace benefits before the deadline",
+     "category": "insurance",
+     "offset_days": 30,
+     "priority": "high",
+     "date_sensitive": true,
+     "external_party": "Employer benefits provider"
+    },
+    {
+     "key": "update_budget",
+     "title": "Add your new income to your budget",
+     "category": "finance",
+     "offset_days": 14,
+     "priority": "medium"
+    }
+   ],
+   "costs": [
+    {
+     "label": "Monthly transit pass",
+     "category": "travel",
+     "amount": 156,
+     "offset_days": 0
+    }
+   ]
+  },
+  {
+   "id": "pr_preparation",
+   "title": "Permanent residence preparation",
+   "description": "Organise documents and timelines before a permanent residence application.",
+   "key_date_label": "Target submission date",
+   "tasks": [
+    {
+     "key": "official_checklist",
+     "title": "Read the official program guide and document checklist",
+     "category": "documents",
+     "offset_days": -150,
+     "priority": "high",
+     "source_ids": [
+      "ircc-immigrate"
+     ]
+    },
+    {
+     "key": "language_test",
+     "title": "Book an approved language test",
+     "category": "documents",
+     "offset_days": -150,
+     "priority": "high",
+     "depends_on": [
+      "official_checklist"
+     ],
+     "date_sensitive": true,
+     "external_party": "Language test centre"
+    },
+    {
+     "key": "professional",
+     "title": "Book a consultation with a licensed professional for case-specific questions",
+     "category": "legal",
+     "offset_days": -120,
+     "priority": "medium",
+     "guidance": "SettleWise organises your documents and dates; it does not assess eligibility.",
+     "source_ids": [
+      "cicc-find-consultant"
+     ]
+    },
+    {
+     "key": "police_certificates",
+     "title": "Request police certificates from each country you lived in",
+     "category": "documents",
+     "offset_days": -120,
+     "priority": "high",
+     "depends_on": [
+      "official_checklist"
+     ],
+     "external_party": "Foreign police authorities"
+    },
+    {
+     "key": "identity_docs",
+     "title": "Gather identity and civil status documents for each family member",
+     "category": "documents",
+     "offset_days": -90,
+     "priority": "high",
+     "depends_on": [
+      "official_checklist"
+     ]
+    },
+    {
+     "key": "translations",
+     "title": "Get certified translations of documents not in English or French",
+     "category": "documents",
+     "offset_days": -60,
+     "priority": "medium",
+     "depends_on": [
+      "identity_docs"
+     ],
+     "external_party": "Certified translator"
+    },
+    {
+     "key": "proof_of_funds",
+     "title": "Prepare proof of funds statements",
+     "category": "finance",
+     "offset_days": -30,
+     "priority": "medium",
+     "external_party": "Bank"
+    },
+    {
+     "key": "photos",
+     "title": "Get photos that meet the specifications",
+     "category": "documents",
+     "offset_days": -14,
+     "priority": "low"
+    }
+   ],
+   "costs": [
+    {
+     "label": "Language test fee",
+     "category": "documents",
+     "amount": 320,
+     "offset_days": -150
+    },
+    {
+     "label": "Translations",
+     "category": "documents",
+     "amount": 300,
+     "offset_days": -60
+    },
+    {
+     "label": "Police certificates",
+     "category": "documents",
+     "amount": 100,
+     "offset_days": -120
+    }
+   ]
+  },
+  {
+   "id": "travel",
+   "title": "International travel",
+   "description": "Travel outside Canada and come back without document surprises.",
+   "key_date_label": "Departure date",
+   "tasks": [
+    {
+     "key": "check_passport",
+     "title": "Check your passport is valid for the whole trip",
+     "category": "documents",
+     "offset_days": -60,
+     "priority": "high"
+    },
+    {
+     "key": "check_pr_card",
+     "title": "Check your PR card is valid for your return date",
+     "category": "documents",
+     "offset_days": -60,
+     "priority": "high",
+     "when": {
+      "immigration_status": [
+       "permanent_resident"
+      ]
+     },
+     "source_ids": [
+      "ircc-pr-card"
+     ]
+    },
+    {
+     "key": "residency_days",
+     "title": "Count your days in Canada for the residency obligation",
+     "category": "documents",
+     "offset_days": -45,
+     "priority": "medium",
+     "when": {
+      "immigration_status": [
+       "permanent_resident"
+      ]
+     },
+     "source_ids": [
+      "ircc-pr-status"
+     ]
+    },
+    {
+     "key": "prtd",
+     "title": "Apply for a PR travel document if your card will expire abroad",
+     "category": "documents",
+     "offset_days": -45,
+     "priority": "high",
+     "depends_on": [
+      "check_pr_card"
+     ],
+     "when": {
+      "immigration_status": [
+       "permanent_resident"
+      ]
+     },
+     "source_ids": [
+      "ircc-pr-travel-document"
+     ]
+    },
+    {
+     "key": "book_flights",
+     "title": "Book flights",
+     "category": "travel",
+     "offset_days": -45,
+     "priority": "medium",
+     "depends_on": [
+      "check_passport"
+     ],
+     "date_sensitive": true,
+     "external_party": "Airline or travel agent"
+    },
+    {
+     "key": "travel_insurance",
+     "title": "Buy travel medical insurance for your dates",
+     "category": "insurance",
+     "offset_days": -14,
+     "priority": "high",
+     "depends_on": [
+      "book_flights"
+     ],
+     "date_sensitive": true,
+     "external_party": "Insurer"
+    },
+    {
+     "key": "advisories",
+     "title": "Check travel advice for your destination",
+     "category": "travel",
+     "offset_days": -14,
+     "priority": "medium",
+     "source_ids": [
+      "travel-gc"
+     ]
+    },
+    {
+     "key": "notify_bank",
+     "title": "Tell your bank and card issuer about your travel dates",
+     "category": "finance",
+     "offset_days": -3,
+     "priority": "low",
+     "date_sensitive": true,
+     "external_party": "Bank"
+    }
+   ],
+   "costs": [
+    {
+     "label": "Flights",
+     "category": "travel",
+     "amount": 1500,
+     "offset_days": -45
+    },
+    {
+     "label": "Travel medical insurance",
+     "category": "insurance",
+     "amount": 120,
+     "offset_days": -14
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "ircc-new-immigrants",
+   "title": "New immigrants - IRCC",
+   "publisher": "Immigration, Refugees and Citizenship Canada",
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants.html",
+   "reviewed_on": null,
+   "tags": [
+    "newcomer",
+    "arrival",
+    "address",
+    "ircc",
+    "settle",
+    "first steps",
+    "permanent resident"
+   ],
+   "summary": "Starting point for people who recently immigrated: what to do after arriving, getting important documents, finding free settlement services and keeping IRCC informed of changes such as a new address."
+  },
+  {
+   "id": "ircc-pr-card",
+   "title": "PR card - IRCC",
+   "publisher": "Immigration, Refugees and Citizenship Canada",
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants/pr-card.html",
+   "reviewed_on": null,
+   "tags": [
+    "pr card",
+    "permanent resident",
+    "renew",
+    "expire",
+    "travel",
+    "return"
+   ],
+   "summary": "How to apply for, renew or replace a permanent resident card. Permanent residents need a valid PR card or a PR travel document to board a flight back to Canada."
+  },
+  {
+   "id": "ircc-pr-status",
+   "title": "Understand permanent resident status - IRCC",
+   "publisher": "Immigration, Refugees and Citizenship Canada",
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants/pr-card/understand-pr-status.html",
+   "reviewed_on": null,
+   "tags": [
+    "residency obligation",
+    "days",
+    "permanent resident",
+    "travel",
+    "status",
+    "lose status"
+   ],
+   "summary": "Explains the rights of permanent residents and the residency obligation: permanent residents must be physically present in Canada for a minimum number of days within a five-year period."
+  },
+  {
+   "id": "ircc-pr-travel-document",
+   "title": "Permanent resident travel document - IRCC",
+   "publisher": "Immigration, Refugees and Citizenship Canada",
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/new-immigrants/pr-card/apply-travel-document.html",
+   "reviewed_on": null,
+   "tags": [
+    "prtd",
+    "travel document",
+    "outside canada",
+    "pr card expired",
+    "return"
+   ],
+   "summary": "Permanent residents outside Canada without a valid PR card can apply for a permanent resident travel document (PRTD) to return to Canada by plane, train, bus or boat."
+  },
+  {
+   "id": "ircc-immigrate",
+   "title": "Immigrate to Canada - IRCC",
+   "publisher": "Immigration, Refugees and Citizenship Canada",
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada.html",
+   "reviewed_on": null,
+   "tags": [
+    "permanent residence",
+    "application",
+    "express entry",
+    "program",
+    "documents",
+    "checklist"
+   ],
+   "summary": "Overview of immigration programs and links to each program's official guide and document checklist. Program rules and eligibility are set by IRCC."
+  },
+  {
+   "id": "ircc-citizenship-eligibility",
+   "title": "Canadian citizenship eligibility - IRCC",
+   "publisher": "Immigration, Refugees and Citizenship Canada",
+   "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility.html",
+   "reviewed_on": null,
+   "tags": [
+    "citizenship",
+    "eligibility",
+    "physical presence",
+    "apply",
+    "become canadian"
+   ],
+   "summary": "Official requirements to become a Canadian citizen, including physical presence, tax filing and language requirements, with a presence calculator."
+  },
+  {
+   "id": "ircc-newcomer-services",
+   "title": "Find free newcomer services near you - IRCC",
+   "publisher": "Immigration, Refugees and Citizenship Canada",
+   "url": "https://ircc.canada.ca/english/newcomers/services/index.asp",
+   "reviewed_on": null,
+   "tags": [
+    "settlement services",
+    "free",
+    "agency",
+    "help",
+    "language classes",
+    "employment",
+    "near me"
+   ],
+   "summary": "Search tool for free, government-funded newcomer services such as settlement help, language classes and job search support, by postal code."
+  },
+  {
+   "id": "cicc-find-consultant",
+   "title": "Find a licensed immigration consultant - College of Immigration and Citizenship Consultants",
+   "publisher": "College of Immigration and Citizenship Consultants",
+   "url": "https://college-ic.ca/",
+   "reviewed_on": null,
+   "tags": [
+    "consultant",
+    "licensed",
+    "rcic",
+    "legal advice",
+    "immigration advice",
+    "representative",
+    "sponsorship"
+   ],
+   "summary": "The regulator for immigration and citizenship consultants in Canada. Use its public register to check that a consultant is licensed before paying for advice."
+  },
+  {
+   "id": "esdc-sin",
+   "title": "Social Insurance Number - Service Canada",
+   "publisher": "Employment and Social Development Canada",
+   "url": "https://www.canada.ca/en/employment-social-development/services/sin.html",
+   "reviewed_on": null,
+   "tags": [
+    "sin",
+    "social insurance number",
+    "work",
+    "employer",
+    "payroll",
+    "apply"
+   ],
+   "summary": "You need a Social Insurance Number to work in Canada or receive government benefits. Explains who can apply, the documents needed and how to keep your SIN protected."
+  },
+  {
+   "id": "cra-newcomers",
+   "title": "Newcomers to Canada (immigrants) - CRA",
+   "publisher": "Canada Revenue Agency",
+   "url": "https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html",
+   "reviewed_on": null,
+   "tags": [
+    "tax",
+    "newcomer",
+    "residency",
+    "file taxes",
+    "benefits",
+    "gst credit"
+   ],
+   "summary": "Tax information for newcomers: residency status for tax purposes, filing your first return and applying for benefits and credits."
+  },
+  {
+   "id": "cra-my-account",
+   "title": "My Account for individuals - CRA",
+   "publisher": "Canada Revenue Agency",
+   "url": "https://www.canada.ca/en/revenue-agency/services/e-services/digital-services-individuals/account-individuals.html",
+   "reviewed_on": null,
+   "tags": [
+    "cra",
+    "my account",
+    "address change",
+    "update address",
+    "tax",
+    "benefits",
+    "moving"
+   ],
+   "summary": "The CRA's secure online portal. You can view tax and benefit information and change your address after you move."
+  },
+  {
+   "id": "cra-td1",
+   "title": "TD1 Personal Tax Credits Returns - CRA",
+   "publisher": "Canada Revenue Agency",
+   "url": "https://www.canada.ca/en/revenue-agency/services/forms-publications/td1-personal-tax-credits-returns.html",
+   "reviewed_on": null,
+   "tags": [
+    "td1",
+    "new job",
+    "payroll",
+    "tax deduction",
+    "employer",
+    "forms"
+   ],
+   "summary": "Federal and provincial TD1 forms you give a new employer so they deduct the right amount of income tax from your pay."
+  },
+  {
+   "id": "cra-ccb",
+   "title": "Canada Child Benefit - CRA",
+   "publisher": "Canada Revenue Agency",
+   "url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit-overview.html",
+   "reviewed_on": null,
+   "tags": [
+    "child benefit",
+    "ccb",
+    "children",
+    "family",
+    "apply",
+    "newborn"
+   ],
+   "summary": "A tax-free monthly payment to eligible families to help with the cost of raising children under 18. Explains who can apply and how."
+  },
+  {
+   "id": "ontario-ohip",
+   "title": "Apply for OHIP and get a health card - Ontario",
+   "publisher": "Government of Ontario",
+   "url": "https://www.ontario.ca/page/apply-ohip-and-get-health-card",
+   "reviewed_on": null,
+   "tags": [
+    "ohip",
+    "health card",
+    "health insurance",
+    "ontario",
+    "doctor",
+    "newcomer"
+   ],
+   "summary": "How to apply for Ontario Health Insurance Plan coverage and a health card, who is eligible and the documents to bring to ServiceOntario."
+  },
+  {
+   "id": "ontario-change-address",
+   "title": "Change your address - Ontario",
+   "publisher": "Government of Ontario",
+   "url": "https://www.ontario.ca/page/change-your-address",
+   "reviewed_on": null,
+   "tags": [
+    "address change",
+    "driver's licence",
+    "health card",
+    "vehicle permit",
+    "moving",
+    "serviceontario"
+   ],
+   "summary": "Change the address on your Ontario driver's licence, vehicle permit and health card, online or in person at ServiceOntario."
+  },
+  {
+   "id": "ontario-renting-rights",
+   "title": "Renting in Ontario - your rights",
+   "publisher": "Government of Ontario",
+   "url": "https://www.ontario.ca/page/renting-ontario-your-rights",
+   "reviewed_on": null,
+   "tags": [
+    "tenant",
+    "landlord",
+    "lease",
+    "notice",
+    "rent",
+    "deposit",
+    "moving",
+    "eviction"
+   ],
+   "summary": "Rights and responsibilities of tenants and landlords in Ontario, including the standard lease, rent deposits, rent increases and how to end a tenancy."
+  },
+  {
+   "id": "ontario-esa",
+   "title": "Your guide to the Employment Standards Act - Ontario",
+   "publisher": "Government of Ontario",
+   "url": "https://www.ontario.ca/document/your-guide-employment-standards-act-0",
+   "reviewed_on": null,
+   "tags": [
+    "employment standards",
+    "work rights",
+    "minimum wage",
+    "overtime",
+    "vacation",
+    "new job",
+    "ontario"
+   ],
+   "summary": "Minimum standards for most workplaces in Ontario: pay, hours, overtime, vacation, public holidays and leaves."
+  },
+  {
+   "id": "canada-post-forwarding",
+   "title": "Mail forwarding - Canada Post",
+   "publisher": "Canada Post",
+   "url": "https://www.canadapost-postescanada.ca/cpc/en/personal/receiving/manage-mail/mail-forwarding.page",
+   "reviewed_on": null,
+   "tags": [
+    "mail forwarding",
+    "moving",
+    "address",
+    "mail"
+   ],
+   "summary": "Forward your mail to a new address for a chosen period when you move. A fee applies."
+  },
+  {
+   "id": "fcac-bank-account",
+   "title": "Opening a bank account - Financial Consumer Agency of Canada",
+   "publisher": "Financial Consumer Agency of Canada",
+   "url": "https://www.canada.ca/en/financial-consumer-agency/services/banking/opening-bank-account.html",
+   "reviewed_on": null,
+   "tags": [
+    "bank account",
+    "banking",
+    "identification",
+    "newcomer",
+    "open account",
+    "fees"
+   ],
+   "summary": "Your rights when opening a bank account, the identification banks may accept and how to compare account fees."
+  },
+  {
+   "id": "travel-gc",
+   "title": "Travel advice and advisories - Government of Canada",
+   "publisher": "Global Affairs Canada",
+   "url": "https://travel.gc.ca/",
+   "reviewed_on": null,
+   "tags": [
+    "travel",
+    "advisory",
+    "destination",
+    "trip",
+    "safety",
+    "abroad"
+   ],
+   "summary": "Official travel advice for every country, entry requirements and what to know before you leave Canada."
+  },
+  {
+   "id": "job-bank",
+   "title": "Job Bank - Government of Canada",
+   "publisher": "Employment and Social Development Canada",
+   "url": "https://www.jobbank.gc.ca/",
+   "reviewed_on": null,
+   "tags": [
+    "jobs",
+    "job search",
+    "employment",
+    "wages",
+    "careers"
+   ],
+   "summary": "Government job board with job postings, wage information and career planning tools."
+  }
+ ],
+ "providers": [
+  {
+   "name": "Harbourfront Newcomer Settlement Centre (sample)",
+   "service_types": [
+    "settlement_agency",
+    "employment",
+    "housing"
+   ],
+   "city": "Toronto",
+   "province": "ON",
+   "phone": "416-555-0101",
+   "website": "https://example.org/harbourfront",
+   "languages": [
+    "English",
+    "French",
+    "Tagalog",
+    "Arabic"
+   ],
+   "description": "Free settlement counselling, housing search help and employment workshops."
+  },
+  {
+   "name": "Lakeshore Community Legal Clinic (sample)",
+   "service_types": [
+    "legal_clinic"
+   ],
+   "city": "Toronto",
+   "province": "ON",
+   "phone": "416-555-0102",
+   "website": "https://example.org/lakeshore-legal",
+   "languages": [
+    "English",
+    "Spanish",
+    "Portuguese"
+   ],
+   "description": "Free legal information for tenants and workers with low income."
+  },
+  {
+   "name": "Maple Immigration Consulting (sample licensed consultant)",
+   "service_types": [
+    "immigration_consultant"
+   ],
+   "city": "Toronto",
+   "province": "ON",
+   "phone": "416-555-0103",
+   "website": "https://example.org/maple-rcic",
+   "languages": [
+    "English",
+    "Hindi",
+    "Punjabi"
+   ],
+   "description": "Licensed consultant for case-specific immigration questions. Fees apply."
+  },
+  {
+   "name": "Northway Credit Union Newcomer Desk (sample)",
+   "service_types": [
+    "bank"
+   ],
+   "city": "Toronto",
+   "province": "ON",
+   "phone": "416-555-0104",
+   "website": "https://example.org/northway",
+   "languages": [
+    "English",
+    "Mandarin",
+    "Cantonese"
+   ],
+   "description": "Newcomer accounts and credit-building products."
+  },
+  {
+   "name": "Trillium Home & Tenant Insurance (sample)",
+   "service_types": [
+    "insurer"
+   ],
+   "city": "Toronto",
+   "province": "ON",
+   "phone": "416-555-0105",
+   "website": "https://example.org/trillium-insurance",
+   "languages": [
+    "English",
+    "French"
+   ],
+   "description": "Tenant and auto insurance quotes."
+  },
+  {
+   "name": "Ottawa Valley Welcome Centre (sample)",
+   "service_types": [
+    "settlement_agency",
+    "healthcare",
+    "language_classes"
+   ],
+   "city": "Ottawa",
+   "province": "ON",
+   "phone": "613-555-0106",
+   "website": "https://example.org/ottawa-welcome",
+   "languages": [
+    "English",
+    "French",
+    "Somali"
+   ],
+   "description": "Settlement help, language classes and help finding a family doctor."
+  },
+  {
+   "name": "Prairie Gateway Settlement Services (sample)",
+   "service_types": [
+    "settlement_agency",
+    "employment"
+   ],
+   "city": "Calgary",
+   "province": "AB",
+   "phone": "403-555-0107",
+   "website": "https://example.org/prairie-gateway",
+   "languages": [
+    "English",
+    "Ukrainian",
+    "Arabic"
+   ],
+   "description": "Employment coaching and settlement services."
+  },
+  {
+   "name": "Pacific Bridge Family Services (sample)",
+   "service_types": [
+    "settlement_agency",
+    "family",
+    "childcare"
+   ],
+   "city": "Vancouver",
+   "province": "BC",
+   "phone": "604-555-0108",
+   "website": "https://example.org/pacific-bridge",
+   "languages": [
+    "English",
+    "Korean",
+    "Farsi"
+   ],
+   "description": "Family programs, childcare referrals and parenting workshops."
+  }
+ ]
+}

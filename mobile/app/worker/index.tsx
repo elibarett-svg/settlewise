@@ -1,11 +1,11 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 
 import { api } from '../../src/api/client';
 import { useApiMutation, useClients, useConsentFields } from '../../src/api/hooks';
 import { Badge, Body, Button, Card, EmptyState, Muted, QueryView, Row, Screen, Sheet, SwitchRow, TextField } from '../../src/components/ui';
-import { showError } from '../../src/lib/alerts';
+import { notify, showError } from '../../src/lib/alerts';
 import { formatDate } from '../../src/lib/format';
 import { spacing } from '../../src/theme';
 
@@ -63,7 +63,7 @@ function RequestSheet({ visible, onClose }: { visible: boolean; onClose: () => v
         onPress={() =>
           send.mutate(
             { client_email: email.trim(), purpose, fields: chosen, duration_days: 90 },
-            { onSuccess: (r) => { onClose(); Alert.alert('Request sent', r.status); }, onError: (e) => showError(e) },
+            { onSuccess: (r) => { onClose(); notify('Request sent', r.status); }, onError: (e) => showError(e) },
           )
         }
       />

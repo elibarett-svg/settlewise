@@ -2,14 +2,15 @@
   "name": "settlewise-mobile",
   "version": "0.1.0",
   "private": true,
-  "main": "expo-router/entry",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "ios": "expo run:ios",
     "android": "expo run:android",
     "typecheck": "tsc --noEmit",
     "lint": "expo lint",
-    "doctor": "npx expo-doctor"
+    "doctor": "npx expo-doctor",
+    "demo:web": "EXPO_PUBLIC_DEMO=1 expo export --platform web --output-dir dist-demo && node scripts/inline-web-demo.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",

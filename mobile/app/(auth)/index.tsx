@@ -2,7 +2,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { View } from 'react-native';
 
-import { Body, Button, Muted, Screen, Title } from '../../src/components/ui';
+import { useState } from 'react';
+
+import { DEMO } from '../../src/api/client';
+import { useAuth } from '../../src/auth/AuthContext';
+import { Body, Button, Card, Muted, Screen, Title } from '../../src/components/ui';
+import { showError } from '../../src/lib/alerts';
 import { useT } from '../../src/i18n';
 import { spacing, useColors } from '../../src/theme';
 
@@ -15,6 +20,17 @@ const POINTS: { icon: 'git-network-outline' | 'swap-horizontal-outline' | 'lock-
 export default function Welcome() {
   const t = useT();
   const c = useColors();
+  const { signIn } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const tryDemo = async () => {
+    setBusy(true);
+    try {
+      await signIn('sarah@example.com', 'demo');
+    } catch (e) {
+      showError(e);
+      setBusy(false);
+    }
+  };
   return (
     <Screen edges={['top', 'bottom']} style={{ justifyContent: 'center', flexGrow: 1 }}>
       <View style={{ alignItems: 'center', gap: spacing.md, marginTop: spacing.xxl }}>
@@ -32,8 +48,18 @@ export default function Welcome() {
           </View>
         ))}
       </View>
-      <Button title={t.auth.signUp} onPress={() => router.push('/sign-up')} />
-      <Button title={t.auth.signIn} variant="secondary" onPress={() => router.push('/sign-in')} />
+      {DEMO && (
+        <Card style={{ borderColor: c.primary }}>
+          <Body style={{ fontWeight: '700' }}>Interactive demo</Body>
+          <Muted>
+            Explore SettleWise as Sarah, the fictional newcomer from the Project Vision. All data is synthetic and stays in this browser.
+            Try Plans → Move to the new apartment → Change date.
+          </Muted>
+          <Button title="Try the demo as Sarah" icon="play" loading={busy} onPress={tryDemo} />
+        </Card>
+      )}
+      <Button title={t.auth.signUp} variant={DEMO ? 'secondary' : 'primary'} onPress={() => router.push('/sign-up')} />
+      {!DEMO && <Button title={t.auth.signIn} variant="secondary" onPress={() => router.push('/sign-in')} />}
       <Muted style={{ textAlign: 'center' }}>{t.auth.privacy}</Muted>
     </Screen>
   );

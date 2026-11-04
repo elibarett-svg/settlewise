@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import type { UseQueryResult } from '@tanstack/react-query';
-import { useState, type ComponentProps, type ReactNode } from 'react';
+import { createElement, useState, type ComponentProps, type ReactNode } from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -286,20 +286,30 @@ export function DateField({
   );
 }
 
-/** The native picker has no web build; a plain field keeps development previews usable. */
+/** The native picker has no web build, so web uses the browser's own date input. */
 function WebDateField({ label, value, onChange }: { label: string; value: string | null; onChange: (v: string | null) => void }) {
-  const [text, setText] = useState(value ?? '');
+  const c = useColors();
   return (
-    <TextField
-      label={label}
-      value={text}
-      placeholder="YYYY-MM-DD"
-      onChangeText={(next) => {
-        setText(next);
-        if (/^\d{4}-\d{2}-\d{2}$/.test(next)) onChange(next);
-        else if (next === '') onChange(null);
-      }}
-    />
+    <View style={{ gap: 6 }}>
+      <Text style={{ color: c.text, fontWeight: '600', fontSize: 14 }}>{label}</Text>
+      {createElement('input', {
+        type: 'date',
+        value: value ?? '',
+        'aria-label': label,
+        onChange: (e: { target: { value: string } }) => onChange(e.target.value || null),
+        style: {
+          minHeight: 48,
+          borderRadius: radius.md,
+          border: `1px solid ${c.border}`,
+          padding: `0 ${spacing.md}px`,
+          fontSize: 16,
+          color: c.text,
+          backgroundColor: c.surface,
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+          colorScheme: 'light dark',
+        },
+      })}
+    </View>
   );
 }
 

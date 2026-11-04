@@ -1,11 +1,17 @@
 import Constants from 'expo-constants';
 
+import { DemoError, demoApi } from '../demo/server';
+
+/** The shareable web demo (EXPO_PUBLIC_DEMO=1) runs the API inside the page. */
+export const DEMO = process.env.EXPO_PUBLIC_DEMO === '1';
+
 /** Resolve the API base URL: EXPO_PUBLIC_API_URL, then app.json extra.apiUrl, then the
  * machine running the Expo dev server (so a phone on the same Wi-Fi just works). */
 function resolveApiUrl(): string {
-  const explicit = process.env.EXPO_PUBLIC_API_URL || (Constants.expoConfig?.extra?.apiUrl as string | undefined);
+  const text = (value: unknown) => (typeof value === 'string' && value.trim() ? value.trim() : undefined);
+  const explicit = text(process.env.EXPO_PUBLIC_API_URL) ?? text(Constants.expoConfig?.extra?.apiUrl);
   if (explicit) return explicit.replace(/\/$/, '');
-  const host = Constants.expoConfig?.hostUri?.split(':')[0];
+  const host = text(Constants.expoConfig?.hostUri)?.split(':')[0];
   return host ? `http://${host}:8000` : 'http://localhost:8000';
 }
 
@@ -61,6 +67,19 @@ export async function api<T>(
   options: { method?: string; body?: unknown; query?: Query } = {},
 ): Promise<T> {
   const { method = 'GET', body, query } = options;
+  if (DEMO) {
+    const q = Object.fromEntries(
+      Object.entries(query ?? {})
+        .filter(([, v]) => v !== undefined && v !== null && v !== '')
+        .map(([k, v]) => [k, String(v)]),
+    );
+    try {
+      return (await demoApi(method, path, q, body)) as T;
+    } catch (e) {
+      if (e instanceof DemoError) throw new ApiError(e.status, messageFrom(e.status, { detail: e.detail }), e.detail);
+      throw e;
+    }
+  }
   let res: Response;
   try {
     res = await fetch(`${API_URL}/api/v1${path}${queryString(query)}`, {
