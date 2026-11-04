@@ -61,15 +61,17 @@ def test_dispatch_inbox_snooze_and_quiet_hours(client, auth):
         json={"timezone": "UTC", "quiet_start": "22:00", "quiet_end": "07:00"},
         headers=auth,
     )
+    # Fixed times so the test does not depend on when it runs.
+    midnight = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
+    late = midnight + timedelta(hours=23)
+    noon = midnight + timedelta(hours=12)
     rem = client.post(
         f"{API}/notifications/reminders",
-        json={"title": "Book movers", "remind_at": (datetime.now(UTC) - timedelta(minutes=1)).isoformat()},
+        json={"title": "Book movers", "remind_at": (late - timedelta(minutes=30)).isoformat()},
         headers=auth,
     )
     assert rem.status_code == 201
     settings = get_settings()
-    noon = datetime.now(UTC).replace(hour=12, minute=0)
-    late = datetime.now(UTC).replace(hour=23, minute=0)
     with db.SessionLocal() as s:
         assert dispatch_due(s, settings, now=late) == 0  # quiet hours: deferred
         deferred = s.scalar(select(Reminder).where(Reminder.title == "Book movers"))
